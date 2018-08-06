@@ -11,8 +11,8 @@ Original script used to be located at https://github.com/Realbityoda/FreedomCoin
 1. Lookup the "vout" output index number for your 5000TFC txn by viewing the raw output of your txn http://explorer.freedom-coin.io/api/getrawtransaction?txid=<5000TFC-transaction-id>&decrypt=1
 1. Generate and store safely a new masternode key by running 'masternode genkey' on your local wallet app's debug console (Tools->Debug->Console)
 1. Buy a server and log onto it via an ssh terminal (https://my.vultr.com/)
-1. Copy the BiyYoda script to your home directory on your VPS
-1. Execute the script by typing 'bash freedom_install.sh'
+1. Download the node installer script (linux only) by executing this command 'curl -O https://raw.githubusercontent.com/himeshramjee/FreedomCoin/master/tfc_install.sh'
+1. Execute the script by typing 'bash tfc_install.sh'
 1. Paste the masternode key that you generated earlier when the script asks you to specify one (every masternode must have it's own key)
 1. Once the script completes, note down any errors and only continue if you see none
 1. Execute 'Freedomcoind masternode status' and wait till your node is up to date/sync'd with the network (check the count of blocks and compare to your local wallet)
