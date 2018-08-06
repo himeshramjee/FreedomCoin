@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # This is a copy of what used to be available at https://github.com/Realbityoda/FreedomCoin/blob/master/freedom_install.sh.
+# Note that I believe this script was written based off of instructions per the TFC [website](http://www.freedom-coin.io/wp-content/uploads/2018/05/Masternode-Setup-1.pdf) so always check those instructions before running this script.
 # Modifications:
 # 2018/08/06: Tiny bug fix with 'COIN_CLI' variable not being declared
 # 2018/08/06: Updated source url of freedomcoin-core (linux only) to not use Realbityoda's git account (which no longer exists, hence why I've added it here)
