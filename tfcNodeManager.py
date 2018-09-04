@@ -112,7 +112,7 @@ except:
 holdingAddressPrefix="holdingAddress";
 
 print();
-inputUser=input("Who's wallet do you want to process? (Himesh|Satish) ");
+inputUser=input("Who's wallet do you want to process?");
 inputUser=inputUser.lower().capitalize();
 if (len(inputUser.strip()) > 0):
 	print("\tChecking {} configuration for holding account address...".format(coinConfFileName));
