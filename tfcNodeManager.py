@@ -187,8 +187,8 @@ for account in walletAccounts:
 		logger.info("Skipping account. Doesn't belong to current user.\n");
 		# pprint("{} with balance {}".format(account, walletAccounts[account]));
 		continue;
-	elif account == holdingWalletName:
-		logger.info("Skipping account. This is the holding address.\n");
+								   
+																  
 	else:
 		nodeBalance=walletAccounts[account];
 		if nodeBalance > masternodeCollateral:
@@ -199,11 +199,16 @@ for account in walletAccounts:
 				# pprint(unspentList);
 				for otx in unspentList:
 					if otx['amount'] != masternodeCollateral:
-						logger.info("Adding unspent amount of {} TFC (txid: {}).".format(Decimal(otx['amount']), otx['txid']));
+						logger.info("Unspent amount available: {} TFC (txid: {}).".format(Decimal(otx['amount']), otx['txid']));
 						unspentBalance+=Decimal(otx['amount']);
-						allUnspent.append(otx);
-						totalUnspentAmount+=Decimal(otx['amount']);
-				logger.info("{} TFC can be moved to holding address.\n".format(unspentBalance));
+						if account != holdingWalletName:
+							allUnspent.append(otx);
+
+				if account == holdingWalletName:
+					logger.info("This is the holding address. It's balance is {}.\n".format(unspentBalance));
+				else:
+					logger.info("{} TFC can be moved to holding address.\n".format(unspentBalance));
+					totalUnspentAmount+=unspentBalance;
 		elif nodeBalance < masternodeCollateral:
 			logger.warn("Warning! This node address has insufficient collateral ({} vs expected {}).\n".format(nodeBalance, masternodeCollateral));
 		else:
@@ -215,7 +220,8 @@ totalTxFee=round(totalTxFee, 8);
 txAmount=round(totalUnspentAmount-Decimal(totalTxFee), 8);
 print();
 logger.info("Holding wallet name is {} and it has address {}.".format(holdingWalletName, holdingWalletAddress));
-acceptTxFeeInput=input("Using {} unspent txns valued at {} TFC will incur a fee of {} TFC. Continue? (y/n) ".format(len(allUnspent), txAmount, totalTxFee))	;
+logger.info("Using {} unspent txns valued at {} TFC will incur a fee of {} TFC.".format(len(allUnspent), totalUnspentAmount, totalTxFee));
+acceptTxFeeInput=input("So the value after fees is {}. Continue? (y/n) ".format(txAmount));
 if acceptTxFeeInput.strip().lower() != "y":
 	logger.info("Tx not accepted by user. Aborting.");
 	exit();
